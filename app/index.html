@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
 
-  <!--jquery bootstrap ftw-->
+  <!--bootstrap ftw-->
   <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
   <style>
     [ng-cloak] {
@@ -15,7 +15,7 @@
   </style>
   <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 
-  <!--jquery bootstrap ftw-->
+  <!--bootstrap ftw-->
   <script src="lib/jquery/dist/jquery.slim.min.js"></script>
   <script src="lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
 
@@ -67,13 +67,13 @@
       'zbook/zbook.js',
       'zlibrary/zlibrary.js',
       'core/backendapi/backendapi.js',
-      'core/bookstatus/bookstatus.js',
-      'core/version/version.js',
-      'core/version/version-directive.js',
-      'core/version/interpolate-filter.js'
+      'core/bookstatus/bookstatus.js'
+      // 'core/version/version.js',
+      // 'core/version/version-directive.js',
+      // 'core/version/interpolate-filter.js'
     ], function () {
       // when all is done, execute bootstrap AngularJS application
-      angular.bootstrap(document, ['myApp']);
+      angular.bootstrap(document, ['bsa']);
     });
   </script>
   <title>book-shelf-angularjs App</title>

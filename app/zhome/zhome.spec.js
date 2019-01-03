@@ -2,16 +2,19 @@
 
 'use strict';
 
-describe('bsa.zhome module', function() {
+describe('bsa.zhome', function() {
 
   beforeEach(module('bsa.zhome'));
 
-  describe('zhome controller', function(){
+  describe('ZhomeCtrl', function(){
 
-    it('should ....', inject(function($controller) {
-      //spec body
-      var zhomeCtrl = $controller('ZhomeCtrl');
-      expect(zhomeCtrl).toBeDefined();
+    it('should have a foo in the scope', inject(function($controller) {
+      var scope = {};
+      var zhomeCtrl = $controller('ZhomeCtrl', {$scope: scope});
+      // console.log(scope);
+      // expect(zhomeCtrl).toBeDefined();
+
+      expect(scope.foo).toBeDefined();
     }));
 
   });

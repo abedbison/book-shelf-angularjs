@@ -9,6 +9,6 @@ angular.module('bsa.zhome', ['ngRoute'])
   });
 }])
 
-.controller('ZhomeCtrl', [function() {
-  
+.controller('ZhomeCtrl', ['$scope', function($scope) {
+  $scope.foo = 'bar';
 }]);
