@@ -1,40 +1,36 @@
-describe('bsa.zbook module', function() {
+//TODO : create unit test
+describe('bsa.zbook', function() {
 
   // load module
   beforeEach(module('bsa.zbook'));
 
-  // // controller
-  // describe('bsa.zbook controller', function() {
+  var ctrl, $controller, $rootScope, $httpBackend;
 
-  //   it('should ....', inject(function($controller) {
-
-  //     console.log($controller);
-  //     //spec body
-  //     var zbookCtrl = $controller('ZbookCtrl');
-  //     // expect(zbookCtrl).toBeDefined();
-  //   }));
-
-  // });
-
-  var $controller, $rootScope, $httpBackend;
-  beforeEach(inject(function(_$controller_, _$rootScope_, _$httpBackend_){
-    // The injector unwraps the underscores (_) from around the parameter names when matching
+  beforeEach(inject(function($componentController, _$controller_, _$rootScope_, _$httpBackend_){
     $controller = _$controller_;
     $rootScope = _$rootScope_;
     $httpBackend = _$httpBackend_;
+
+    console.log($httpBackend);
+
+    ctrl = $componentController('bsa.zbook');
+
+    // $httpBackend.except('/book').respond([]);
   }));
 
-  describe('$scope.action', function() {
-    it('should be view when loaded', function() {
-      var $scope = $rootScope.$new();
-      var backendAPI = $httpBackend;
+  describe('ZbookCtrl', function() {
+    
+
+    // it('should has an empty book', function() {
+      // var $scope = $rootScope.$new();
+      // var controller = $controller('ZbookCtrl', { $scope: $scope, BackendAPI:$httpBackend });
 
       // var controller = $controller('ZbookCtrl', {});
       // var controller = $controller('ZbookCtrl', { $scope: $scope, BackendAPI:$httpBackend });
       // $scope.password = 'longerthaneightchars';
       // $scope.grade();
       // expect($scope.strength).toEqual('strong');
-    });
+    // });
   });
 
 });

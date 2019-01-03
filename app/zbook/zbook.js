@@ -9,22 +9,20 @@ angular.module('bsa.zbook', ['ngRoute'])
     });
   }])
 
-  .controller('ZbookCtrl', ['$scope', 'BackendAPI', function ($scope, BackendAPI) {
-    var dummybook = {
+  .service('ZbookService', function () {
+    const self = this;
+    const dummybook = {
       'id': '0',
-      'isbn': '', //"12345-6789-0000-1",
-      'title': '', //"Javascript: The Good Part",
-      "author": '', // "O'RLY",
+      'isbn': '',
+      'title': '',
+      "author": '',
       "status": 'NOT_SHELVED'
     };
 
-    $scope.books = BackendAPI.getAllBooks();
-    $scope.action = 'view';
-    $scope.title = 'View Books';
-    $scope.booksOrderBy = 'isbn';
+    self.dummydata = angular.copy(dummybook);
+  })
 
-    // some dummy book
-    $scope.book = dummybook;
+  .controller('ZbookCtrl', ['$scope', 'BackendAPI', 'ZbookService', function ($scope, BackendAPI, ZbookService) {
 
     $scope.editBook = function (id) {
       $scope.book = angular.copy($scope.books.find(x => x.id === id));
@@ -32,7 +30,7 @@ angular.module('bsa.zbook', ['ngRoute'])
     }
 
     $scope.newBook = function () {
-      $scope.book = angular.copy(dummybook);
+      $scope.book = ZbookService.dummydata;
       $scope.changeMode('new');
     }
 
@@ -41,13 +39,15 @@ angular.module('bsa.zbook', ['ngRoute'])
     }
 
     $scope.saveBook = function () {
-      if($scope.formbook.$valid) {
-        
-        BackendAPI.postBook($scope.book).$promise.then(function(data) {
-          if(data.id) {
-            // alert('your data is saved  '); // TODO : make it more user friendly
+      if ($scope.formbook.$valid) {
+
+        BackendAPI.postBook($scope.book).$promise.then(function (data) {
+          if (data.id) {
+            // alert('your data is saved ');
           }
           $scope.refreshPage()
+        }, function (error) {
+          alert("something went wrong with the API...");
         });
       } else {
         alert('please check your form'); // TODO : make it more user friendly
@@ -55,14 +55,15 @@ angular.module('bsa.zbook', ['ngRoute'])
     }
 
     $scope.refreshPage = function () {
-      BackendAPI.getAllBooks().$promise.then(function(data) {
+      BackendAPI.getAllBooks().$promise.then(function (data) {
         $scope.books = data;
+      }, function (error) {
+        alert("something went wrong with the API...");
       });
       $scope.changeMode('view');
     }
 
     $scope.changeMode = function (mode) {
-      console.log(mode);
       switch (mode) {
         case 'new':
           $scope.action = 'new';
@@ -82,5 +83,9 @@ angular.module('bsa.zbook', ['ngRoute'])
     $scope.currentView = function (action) {
       return $scope.action == action;
     }
+
+    $scope.refreshPage();
+    $scope.booksOrderBy = 'isbn';
+    $scope.book = ZbookService.dummydata; // some dummy book
 
   }]);

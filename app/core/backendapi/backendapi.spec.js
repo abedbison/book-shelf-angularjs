@@ -1,15 +1,18 @@
-// TODO : create test
+// TODO : create unit test
 'use strict';
 
 describe('BackendAPI', function() {
 
   var $httpBackend;
   var BackendAPI;
-  var phonesData = [
-    {name: 'Phone X'},
-    {name: 'Phone Y'},
-    {name: 'Phone Z'}
+  var bookData = [
+    {name: 'Book 1'},
+    {name: 'Book 2'}
   ];
+
+  var shelfData = [
+    {maxCapacity: 2, currentCapacity: 2, book: bookData}
+  ]
 
   // Add a custom equality tester before each test
   beforeEach(function() {
@@ -22,7 +25,7 @@ describe('BackendAPI', function() {
   // Instantiate the service and "train" `$httpBackend` before each test
   beforeEach(inject(function(_$httpBackend_, _BackendAPI_) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('phones/phones.json').respond(phonesData);
+    $httpBackend.expectGET('http://localhost:8080/book/').respond(bookData);
 
     BackendAPI = _BackendAPI_;
   }));
@@ -33,13 +36,15 @@ describe('BackendAPI', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-//   it('should fetch the phones data from `/phones/phones.json`', function() {
-//     var phones = Phone.query();
+  // it('should fetch data from API get all books', function() {
+  //   var books = BackendAPI.getAllBooks();
 
-//     expect(phones).toEqual([]);
+  // //   console.log(books);
 
-//     $httpBackend.flush();
-//     expect(phones).toEqual(phonesData);
-//   });
+  // //   // expect(books).toEqual([]);
+
+  //   $httpBackend.flush();
+  // //   // expect(books).toEqual(bookData);
+  // });
 
 });

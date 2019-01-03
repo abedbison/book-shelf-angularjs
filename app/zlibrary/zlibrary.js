@@ -22,11 +22,6 @@ angular.module('bsa.zlibrary', ['ngRoute'])
       'shelfId': 0
     }
 
-    $scope.shelves = BackendAPI.getAllShelves();
-    $scope.books = [];
-    $scope.action = 'view';
-    $scope.title = 'View Shelves';
-
     $scope.editShelf = function (id) {
       $scope.shelf = angular.copy($scope.books.find(x => x.id === id));
       $scope.changeMode('edit');
@@ -40,11 +35,13 @@ angular.module('bsa.zlibrary', ['ngRoute'])
     $scope.saveShelf = function () {
       if ($scope.formshelf.$valid) {
 
-        BackendAPI.postShelf($scope.shelf).$promise.then(function(data) {
-          if(data.id) {
+        BackendAPI.postShelf($scope.shelf).$promise.then(function (data) {
+          if (data.id) {
             // alert('your data is saved  '); // TODO : make it more user friendly
           }
           $scope.refreshPage()
+        }, function (error) {
+          alert("something went wrong with the API...");
         });
       } else {
         alert('please check your form'); // TODO : make it more user friendly
@@ -71,6 +68,8 @@ angular.module('bsa.zlibrary', ['ngRoute'])
         // var message = (data.message) ? data.message : 'something went wrong';
         // alert(data.message);
         $scope.refreshPage();
+      }, function (error) {
+        alert("something went wrong with the API...");
       });
     }
 
@@ -81,19 +80,21 @@ angular.module('bsa.zlibrary', ['ngRoute'])
         // var message = (data.message) ? data.message : 'something went wrong';
         // alert(data.message);
         $scope.refreshPage();
+      }, function (error) {
+        alert("something went wrong with the API...");
       });
     }
 
     $scope.refreshPage = function () {
       BackendAPI.getAllShelves().$promise.then(function (data) {
-        console.log(data);
         $scope.shelves = data;
+      }, function (error) {
+        alert("something went wrong with the API...");
       });
       $scope.changeMode('view');
     }
 
     $scope.changeMode = function (mode) {
-      console.log(mode);
       switch (mode) {
         case 'new':
           $scope.action = 'new';
@@ -118,5 +119,7 @@ angular.module('bsa.zlibrary', ['ngRoute'])
       return $scope.action == action;
     }
 
+
+    $scope.refreshPage();
 
   }]);
