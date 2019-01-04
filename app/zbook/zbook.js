@@ -10,8 +10,8 @@ angular.module('bsa.zbook', ['ngRoute'])
   }])
 
   .service('ZbookService', function () {
-    const self = this;
-    const dummybook = {
+    var self = this;
+    self.dummybook = {
       'id': '0',
       'isbn': '',
       'title': '',
@@ -19,7 +19,6 @@ angular.module('bsa.zbook', ['ngRoute'])
       "status": 'NOT_SHELVED'
     };
 
-    self.dummydata = angular.copy(dummybook);
   })
 
   .controller('ZbookCtrl', ['$scope', 'BackendAPI', 'ZbookService', function ($scope, BackendAPI, ZbookService) {
@@ -30,7 +29,7 @@ angular.module('bsa.zbook', ['ngRoute'])
     }
 
     $scope.newBook = function () {
-      $scope.book = ZbookService.dummydata;
+      $scope.book = angular.copy(ZbookService.dummybook);
       $scope.changeMode('new');
     }
 
@@ -42,15 +41,13 @@ angular.module('bsa.zbook', ['ngRoute'])
       if ($scope.formbook.$valid) {
 
         BackendAPI.postBook($scope.book).$promise.then(function (data) {
-          if (data.id) {
-            // alert('your data is saved ');
-          }
+          alertify.notify((data.id)?'Book Saved':'something went wrong');
           $scope.refreshPage()
         }, function (error) {
           alert("something went wrong with the API...");
         });
       } else {
-        alert('please check your form'); // TODO : make it more user friendly
+        alert('please check your form');
       }
     }
 
@@ -86,6 +83,6 @@ angular.module('bsa.zbook', ['ngRoute'])
 
     $scope.refreshPage();
     $scope.booksOrderBy = 'isbn';
-    $scope.book = ZbookService.dummydata; // some dummy book
+    $scope.book = angular.copy(ZbookService.dummybook);
 
   }]);

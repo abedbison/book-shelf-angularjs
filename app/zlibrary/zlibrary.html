@@ -18,11 +18,11 @@
   <div class="col-md-6 col-sm-12" ng-repeat="shelf in shelves">
     <div class="card" style="margin-bottom: .75rem;">
       <div class="card-header">
-        <b>Shelf #{{$index + 1}}</b>
+        <b>Shelf #{{shelf.id}}</b>
         <button class="btn btn-success btn-sm float-right" ng-click="findBook(shelf.id)" ng-disabled="shelf.currentCapacity >= shelf.maxCapacity" >Add Book</button>
       </div>
       <div class="card-body">
-        <ul ng-repeat="ibook in shelf.book">
+        <ul ng-repeat="ibook in shelf.book | orderBy:'id'">
           <li>
             {{ibook.title}} - {{ibook.author}}
             <button class="btn btn-sm btn-danger" ng-click="removeBook(ibook.id, shelf.id)" >&times;</button>
@@ -39,7 +39,7 @@
 
 <div class="row" ng-show="currentView('new') || currentView('edit')" >
   <div class="col-sm-12">
-    <form name="formshelf" >
+    <form name="formshelf" ng-submit="saveShelf()" >
       <div class="row">
         <div class="col-sm-6 col-xs-12">
           <div class="form-group">
@@ -56,7 +56,7 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" ng-click="saveShelf()" >Save</button>
+      <button type="submit" class="btn btn-primary" >Save</button>
     </form>
   </div>
 </div>

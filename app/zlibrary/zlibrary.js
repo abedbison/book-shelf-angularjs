@@ -36,15 +36,13 @@ angular.module('bsa.zlibrary', ['ngRoute'])
       if ($scope.formshelf.$valid) {
 
         BackendAPI.postShelf($scope.shelf).$promise.then(function (data) {
-          if (data.id) {
-            // alert('your data is saved  '); // TODO : make it more user friendly
-          }
+          alertify.notify((data.id)?'Shelf Saved':'something went wrong');
           $scope.refreshPage()
         }, function (error) {
           alert("something went wrong with the API...");
         });
       } else {
-        alert('please check your form'); // TODO : make it more user friendly
+        alert('please check your form');
       }
     }
 
@@ -65,8 +63,7 @@ angular.module('bsa.zlibrary', ['ngRoute'])
     $scope.addBook = function (id) {
       librarypayload.bookId = id;
       BackendAPI.addBook(librarypayload).$promise.then(function (data) {
-        // var message = (data.message) ? data.message : 'something went wrong';
-        // alert(data.message);
+        alertify.notify((data.message) ? data.message : 'something went wrong');
         $scope.refreshPage();
       }, function (error) {
         alert("something went wrong with the API...");
@@ -77,8 +74,7 @@ angular.module('bsa.zlibrary', ['ngRoute'])
       librarypayload.bookId = bookId;
       librarypayload.shelfId = shelfId;
       BackendAPI.removeBook(librarypayload).$promise.then(function (data) {
-        // var message = (data.message) ? data.message : 'something went wrong';
-        // alert(data.message);
+        alertify.notify((data.message) ? data.message : 'something went wrong');
         $scope.refreshPage();
       }, function (error) {
         alert("something went wrong with the API...");
@@ -110,7 +106,7 @@ angular.module('bsa.zlibrary', ['ngRoute'])
           break;
         case 'findbook':
           $scope.action = 'findbook';
-          $scope.title = 'Add Book to Shelf #' + (librarypayload.shelfId + 1);
+          $scope.title = 'Add Book to Shelf #' + (librarypayload.shelfId);
           break;
       }
     }

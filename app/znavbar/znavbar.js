@@ -3,7 +3,6 @@
 angular.module('bsa.znavbar', ['ngRoute'])
 
   .directive('znavbar', function () {
-    // TODO : define the active menu item in html
     return {
       templateUrl: 'znavbar/znavbar.html',
       controller: 'ZnavbarCtrl'
@@ -13,6 +12,4 @@ angular.module('bsa.znavbar', ['ngRoute'])
 
   .controller('ZnavbarCtrl', ['$scope', '$location', function ($scope, $location) {
     $scope.location = $location;
-    // $scope.location = $location;
-    // $scope.$route = $route;
   }]);

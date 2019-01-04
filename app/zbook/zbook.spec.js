@@ -6,34 +6,30 @@ describe('bsa.zbook', function () {
 
   var ctrl, $controller, $rootScope, $httpBackend;
 
-  beforeEach(inject(function ($componentController, _$controller_, _$rootScope_, _$httpBackend_) {
+  beforeEach(inject(function (_$controller_, _$rootScope_, _$httpBackend_) {
     $controller = _$controller_;
     $rootScope = _$rootScope_;
     $httpBackend = _$httpBackend_;
 
-    console.log($httpBackend);
-
-    ctrl = $componentController('bsa.zbook');
-
+    console.log($controller);
+    // ctrl = $componentController('bsa.zbook');
     // $httpBackend.except('/book').respond([]);
+
   }));
 
   describe('ZbookService', function () {
+    it('should ...', function() {
 
+      expect(null).toBeNull();
+    });
   });
 
   describe('ZbookCtrl', function () {
 
 
-    // it('should has an empty book', function() {
+    // it('should ...', function() {
     // var $scope = $rootScope.$new();
     // var controller = $controller('ZbookCtrl', { $scope: $scope, BackendAPI:$httpBackend });
-
-    // var controller = $controller('ZbookCtrl', {});
-    // var controller = $controller('ZbookCtrl', { $scope: $scope, BackendAPI:$httpBackend });
-    // $scope.password = 'longerthaneightchars';
-    // $scope.grade();
-    // expect($scope.strength).toEqual('strong');
     // });
   });
 

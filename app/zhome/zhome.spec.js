@@ -11,9 +11,6 @@ describe('bsa.zhome', function() {
     it('should have a foo in the scope', inject(function($controller) {
       var scope = {};
       var zhomeCtrl = $controller('ZhomeCtrl', {$scope: scope});
-      // console.log(scope);
-      // expect(zhomeCtrl).toBeDefined();
-
       expect(scope.foo).toBeDefined();
     }));
 

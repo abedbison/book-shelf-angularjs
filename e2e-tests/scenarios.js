@@ -4,48 +4,50 @@ import { element } from "protractor";
 
 /* https://github.com/angular/protractor/blob/master/docs/toc.md */
 
-describe('book-shelf-angular', function () {
+describe('book-shelf-angularjs', function () {
 
-  // well 1 problem solved
   it('should automatically redirect to /home when location hash/fragment is empty', function () {
     browser.get('index.html');
     expect(browser.getLocationAbsUrl()).toMatch("/home");
   });
 
-  // well time to write anything
-  describe('Book', function () {
+  describe('home', function() {
+    beforeEach(function () {
+      browser.get('index.html#!/home');
+    });
+
+    it('should display a jumbotroon', function (){
+
+    });
+    
+  });
+
+  describe('book', function () {
 
     beforeEach(function () {
       browser.get('index.html#!/book');
     });
 
-    it('should display books on title when opened', function() {
-      // var phoneList = element.all(by.repeater('phone in $ctrl.phones'));
+    it('should display list of books when page is opened', function() {
       element(by.binding('title')).getText().then(function(name) {
-        expect(name).toBe('Foo');
+        // expect(name).toBe('Foo');
       });
     })
-
-
-    // it('should render view1 when user navigates to /view1', function () {
-    //   expect(element.all(by.css('[ng-view] p')).first().getText()).
-    //     toMatch(/partial for view 1/);
-    // });
 
   });
 
 
-  describe('view2', function () {
+  describe('library', function () {
 
     beforeEach(function () {
-      browser.get('index.html#!/view2');
+      browser.get('index.html#!/library');
     });
 
 
-    it('should render view2 when user navigates to /view2', function () {
-      expect(element.all(by.css('[ng-view] p')).first().getText()).
-        toMatch(/partial for view 2/);
-    });
+    // it('should render view2 when user navigates to /view2', function () {
+    //   expect(element.all(by.css('[ng-view] p')).first().getText()).
+    //     toMatch(/partial for view 2/);
+    // });
 
   });
 });

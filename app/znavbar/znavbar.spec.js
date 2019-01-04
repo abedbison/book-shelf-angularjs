@@ -14,11 +14,11 @@ describe('bsa.znavbar', function () {
 
     describe('ZnavbarCtrl', function () {
 
-        it('should give a empty location', inject(function () {
+        it('should return an empty path', inject(function () {
             var $scope = $rootScope.$new();
             var controller = $controller('ZnavbarCtrl', { $scope: $scope, $location: $location });
 
-            expect($scope.location.path()).toEqual(''); // some empty location
+            expect($scope.location.path()).toEqual('');
         }));
 
 

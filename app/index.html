@@ -5,19 +5,27 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
-
-  <!--bootstrap ftw-->
   <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/alertifyjs/build/css/alertify.min.css">
+  <link rel="stylesheet" href="lib/alertifyjs/build/css/themes/bootstrap.min.css">
   <style>
     [ng-cloak] {
       display: none;
     }
   </style>
   <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-
-  <!--bootstrap ftw-->
   <script src="lib/jquery/dist/jquery.slim.min.js"></script>
   <script src="lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  <script src="lib/alertifyjs/build/alertify.min.js"></script>
+
+  <script>
+    alertify.defaults.transition = "slide";
+    alertify.defaults.theme.ok = "btn btn-primary";
+    alertify.defaults.theme.cancel = "btn btn-danger";
+    alertify.defaults.theme.input = "form-control";
+
+    alertify.transition = 'slide';
+  </script>
 
   <script>
     // include AngularJS loader, which allows the files to load in any order
@@ -68,9 +76,6 @@
       'zlibrary/zlibrary.js',
       'core/backendapi/backendapi.js',
       'core/bookstatus/bookstatus.js'
-      // 'core/version/version.js',
-      // 'core/version/version-directive.js',
-      // 'core/version/interpolate-filter.js'
     ], function () {
       // when all is done, execute bootstrap AngularJS application
       angular.bootstrap(document, ['bsa']);
